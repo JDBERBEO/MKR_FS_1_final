@@ -12,7 +12,9 @@ const signupUser = async (req, res, next) => {
     const user = new User({ email, password });
 
     const savedUser = await user.save();
+    console.log(savedUser);
     const userToken = await accessToken(savedUser.id);
+    console.log(userToken);
     res.status(201).json({ token: userToken });
   } catch (error) {
     next(error);
