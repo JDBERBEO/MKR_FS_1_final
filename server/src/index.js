@@ -3,6 +3,7 @@ const express = require('express');
 const morgan = require('morgan');
 const createError = require('http-errors');
 require('dotenv').config();
+const cors = require('cors');
 
 const app = express();
 
@@ -17,6 +18,7 @@ const authRouter = require('./routes/auth.routes');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
+app.use(cors())
 
 // routes
 app.use(usersRouter);

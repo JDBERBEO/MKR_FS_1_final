@@ -17,11 +17,11 @@ export const SignUpComponent = () => {
     const handleOnClick = (e) => {
         e.preventDefault()
         axios.post('http://localhost:3002/signup', state)
-        .then(function (response) {
-        console.log(response);
-            })
-        .catch(function (error) {
-        console.log(error);
+        .then((response) => {
+            console.log(response.data.token);
+            localStorage.setItem('token',response.data.token)
+        }, (error) => {
+            console.log(error);
         });
 
     }
