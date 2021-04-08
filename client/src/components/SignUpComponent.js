@@ -16,7 +16,7 @@ export const SignUpComponent = () => {
 
     const handleOnClick = (e) => {
         e.preventDefault()
-        axios.post('http://localhost:3001/signup', state)
+        axios.post('http://localhost:3002/signup', state)
         .then(function (response) {
         console.log(response);
             })
