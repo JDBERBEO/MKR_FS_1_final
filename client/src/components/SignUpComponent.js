@@ -11,8 +11,8 @@ export const SignUpComponent = () => {
     const handleOnchange =(e)=>{
         const{name,value}=e.target
         setstate({...state,[name]:value})
-        console.log(state)    
     }
+    console.log(state)    
 
     const handleOnClick = (e) => {
         e.preventDefault()
@@ -29,6 +29,7 @@ export const SignUpComponent = () => {
         <div>
             <form>
                 <div className="mb-3">
+                    <h1>SIGNUP</h1>
                     <label for="exampleInputEmail1" className="form-label">Email address</label>
                     <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" onChange={handleOnchange} value={state.email} name="email"/>
                     <div id="emailHelp" className="form-text"> We'll never share your email with anyone else.</div>
