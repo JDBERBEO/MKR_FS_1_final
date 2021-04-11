@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import axios from 'axios'
+import { GetProjectsView } from './GetProjectsView'
+import { Link } from 'react-router-dom'
 
 
 export const GetProjectsContainer = () => {
@@ -13,6 +15,7 @@ export const GetProjectsContainer = () => {
         
         setProjects(data)
         console.log(data)
+        
       }
 
     useEffect(() => {
@@ -22,14 +25,19 @@ export const GetProjectsContainer = () => {
 
     if (!projects) return <div>Loading...</div>
 
-    return (
-        <div className="card">
-                
-                <div className="card-body">
-                    <h5 className="card-title">Project Title</h5>
-                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" className="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
+    return (<>
+        <Link to='/createProject' className='nav nav-link'>Create Project</Link>
+        {
+          projects.map((project) => (
+            <GetProjectsView
+              key={project._id}
+              project ={project}
+            //   handleEdit={handleEdit}
+            //   handleDelete={handleDelete}
+            //   handleVotar={handleVotar}
+            />))
+        }
+      </>
+       
     )
 }
