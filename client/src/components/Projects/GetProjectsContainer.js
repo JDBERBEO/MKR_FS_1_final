@@ -1,13 +1,15 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useContext } from 'react'
 import axios from 'axios'
 import { GetProjectsView } from './GetProjectsView'
 import { Link } from 'react-router-dom'
+import { ProjectContext } from '../../context/ProjectContext'
 
 
-export const GetProjectsContainer = () => {
+export const GetProjectsContainer = ({history}) => {
     
     const [projects, setProjects] = useState()
-
+    const {editProjects, setEditProjects} = useContext(ProjectContext)
+  
     const fetchProjects = async () => {
         let authorizationToken = localStorage.getItem('token');
         const { data } = await axios.get('http://localhost:3002/projects/', 
@@ -19,11 +21,29 @@ export const GetProjectsContainer = () => {
       }
 
     useEffect(() => {
-       
+        
         fetchProjects()
     }, []);
 
     if (!projects) return <div>Loading...</div>
+
+    const handleDelete = (id) => {
+      let authorizationToken = localStorage.getItem('token');
+      axios.delete(`http://localhost:3002/projects/${id}`, {headers: {authorization: authorizationToken}})
+      .then((response)=>{
+        console.log(response)
+      })
+      .catch((error) => {
+          console.log(error)
+      })
+
+      // let deletedProject = projects.filter((project) => project._id !== id)
+      // setProjects(deletedProject)
+    }
+
+    const handleEdit = (project) => {
+      setEditProjects(project)
+    }
 
     return (<>
         <Link to='/createProject' className='nav nav-link'>Create Project</Link>
@@ -32,8 +52,8 @@ export const GetProjectsContainer = () => {
             <GetProjectsView
               key={project._id}
               project ={project}
-            //   handleEdit={handleEdit}
-            //   handleDelete={handleDelete}
+              handleEdit={handleEdit}
+              handleDelete={handleDelete}
             //   handleVotar={handleVotar}
             />))
         }

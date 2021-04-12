@@ -5,7 +5,7 @@ import { GetProjectsContainer } from '../components/Projects/GetProjectsContaine
 import { SignUpComponent } from '../components/SignUpComponent'
 import { MainPage} from '../components/MainPage'
 import { CreateProjectContainer } from '../components/Projects/CreateProjectContainer'
-
+import { EditProjectView } from '../components/Projects/EditProjectView'
 
 
 export const MainRoutes = () => {
@@ -16,6 +16,7 @@ export const MainRoutes = () => {
         <Route path="/login" component={LogInComponent} />
         <Route path="/projects" component={GetProjectsContainer} />
         <Route path="/createProject" component={CreateProjectContainer} />
+        <Route path="/editProjects" component={EditProjectView} />
         <Route path="/"     component={MainPage} />
       </Switch>
     </>

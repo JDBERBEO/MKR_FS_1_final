@@ -6,17 +6,19 @@ import {
 } from "react-router-dom";
 
 import { MainRoutes } from './Router/MainRoutes';
+import { ProjectContextProvider } from './context/ProjectContext';
 
 function App() {
 
 
 
   return (
-
-      <Router>
-      <MainRoutes />
+      <ProjectContextProvider>
+        <Router>
+        <MainRoutes />
       </Router>
-
+      </ProjectContextProvider>
+      
   );
 }
 
