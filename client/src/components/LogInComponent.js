@@ -32,6 +32,7 @@ export const LogInComponent = ({history}) => {
          <div>
             <form>
                 <div className="mb-3">
+                    
                     <h1>LOGIN</h1>
                     <label for="exampleInputEmail1" className="form-label">Email address</label>
                     <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" onChange={handleOnchange} value={state.email} name="email"/>

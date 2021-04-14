@@ -29,11 +29,11 @@ export const CreateProjectContainer = ({history}) => {
         axios.post('http://localhost:3002/projects', state, {headers: {authorization: authorizationToken }})
         .then((response) => {
             console.log(response);
+            history.replace('/projects')
         },
         ).catch((error) => {
             console.log(error)
         })
-        history.replace('/projects')
     }
 
 

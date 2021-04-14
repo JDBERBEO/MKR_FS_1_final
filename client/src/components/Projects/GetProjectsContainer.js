@@ -5,10 +5,12 @@ import { Link } from 'react-router-dom'
 import { ProjectContext } from '../../context/ProjectContext'
 
 
+
+
 export const GetProjectsContainer = ({history}) => {
     
     const [projects, setProjects] = useState()
-    const {editProjects, setEditProjects} = useContext(ProjectContext)
+    // const {editProjects, setEditProjects} = useContext(ProjectContext)
   
     const fetchProjects = async () => {
         let authorizationToken = localStorage.getItem('token');
@@ -32,18 +34,19 @@ export const GetProjectsContainer = ({history}) => {
       axios.delete(`http://localhost:3002/projects/${id}`, {headers: {authorization: authorizationToken}})
       .then((response)=>{
         console.log(response)
+        const deletedProject = projects.filter((project) => project._id !== id)
+        setProjects(deletedProject)
       })
       .catch((error) => {
           console.log(error)
+          
       })
 
-      // let deletedProject = projects.filter((project) => project._id !== id)
-      // setProjects(deletedProject)
     }
 
-    const handleEdit = (project) => {
-      setEditProjects(project)
-    }
+    // const handleEdit = (project) => {
+    //   setEditProjects(project)
+    // }
 
     return (<>
         <Link to='/createProject' className='nav nav-link'>Create Project</Link>
@@ -52,7 +55,7 @@ export const GetProjectsContainer = ({history}) => {
             <GetProjectsView
               key={project._id}
               project ={project}
-              handleEdit={handleEdit}
+              // handleEdit={handleEdit}
               handleDelete={handleDelete}
             //   handleVotar={handleVotar}
             />))
