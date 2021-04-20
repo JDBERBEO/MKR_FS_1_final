@@ -1,41 +1,29 @@
 import React, {useEffect, useState, useContext } from 'react'
 import axios from 'axios'
 import { GetProjectsView } from './GetProjectsView'
-import { Link } from 'react-router-dom'
+import { Link, useHistory, useParams } from 'react-router-dom'
 import { ProjectContext } from '../../context/ProjectContext'
+import {AuthContext} from '../../context/AuthContext'
 
 
 
 
-export const GetProjectsContainer = ({history}) => {
-    
-    const [projects, setProjects] = useState()
+export const GetProjectsContainer = () => {
+    const history = useHistory()
+    const {projects} = useContext(ProjectContext)
+    const {user} = useContext(AuthContext)
+    const {id} = useParams()
     // const {editProjects, setEditProjects} = useContext(ProjectContext)
   
-    const fetchProjects = async () => {
-        let authorizationToken = localStorage.getItem('token');
-        const { data } = await axios.get('http://localhost:3002/projects/', 
-        {headers: {authorization: authorizationToken}})
-        
-        setProjects(data)
-        console.log(data)
-        
-      }
-
-    useEffect(() => {
-        
-        fetchProjects()
-    }, []);
-
-    if (!projects) return <div>Loading...</div>
+   console.log('projects: ', projects)
 
     const handleDelete = (id) => {
-      let authorizationToken = localStorage.getItem('token');
-      axios.delete(`http://localhost:3002/projects/${id}`, {headers: {authorization: authorizationToken}})
+      
+      axios.delete(`http://localhost:3002/projects/${id}`, {headers: {Authorization: user}})
       .then((response)=>{
         console.log(response)
         const deletedProject = projects.filter((project) => project._id !== id)
-        setProjects(deletedProject)
+        // setProjects(deletedProject)
       })
       .catch((error) => {
           console.log(error)
@@ -44,8 +32,11 @@ export const GetProjectsContainer = ({history}) => {
 
     }
 
-    // const handleEdit = (project) => {
-    //   setEditProjects(project)
+    if(!projects) {
+      return <h2>loading...</h2>
+    }
+    // const handleEdit = (id) => {
+    //     history.push(`/projects/${id}`)
     // }
 
     return (<>
@@ -56,7 +47,7 @@ export const GetProjectsContainer = ({history}) => {
               key={project._id}
               project ={project}
               // handleEdit={handleEdit}
-              handleDelete={handleDelete}
+              // handleDelete={handleDelete}
             //   handleVotar={handleVotar}
             />))
         }

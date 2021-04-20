@@ -12,12 +12,9 @@ export const MainRoutes = () => {
   return (
     <>
       <Switch>
-        <Route path="/signup" component={SignUpComponent} />
-        <Route path="/login" component={LogInComponent} />
-        <Route path="/projects" component={GetProjectsContainer} />
+        <Route exact path="/projects" component={GetProjectsContainer} />
         <Route path="/createProject" component={CreateProjectContainer} />
         <Route path="/editProjects" component={EditProjectView} />
-        <Route path="/"     component={MainPage} />
       </Switch>
     </>
   )

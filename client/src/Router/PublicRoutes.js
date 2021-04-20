@@ -1,0 +1,20 @@
+import React from 'react'
+import { Router, Switch } from 'react-router'
+import { LogInComponent } from '../components/LogInComponent'
+import { MainPage } from '../components/MainPage'
+import { SignUpComponent } from '../components/SignUpComponent'
+import { PublicRouter } from './PublicRouter'
+
+export const PublicRoutes = () => {
+    return (
+    <div>
+    <Router>
+        <Switch>
+            <PublicRouter exact path="/signup" component={SignUpComponent} />
+            <PublicRouter exact path="/login" component={LogInComponent} />
+            <PublicRouter path="/" component={MainPage} />
+        </Switch>
+    </Router>
+    </div>
+    )
+}

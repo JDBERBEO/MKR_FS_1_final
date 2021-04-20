@@ -18,7 +18,7 @@ const authRouter = require('./routes/auth.routes');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
-app.use(cors())
+app.use(cors());
 
 // routes
 app.use(usersRouter);

@@ -5,19 +5,21 @@ import {
   BrowserRouter as Router,
 } from "react-router-dom";
 
-import { MainRoutes } from './Router/MainRoutes';
-// import { ProjectContextProvider } from './context/ProjectContext';
+
+import { AuthContextProvider } from './context/AuthContextProvider';
+import { AppRouter } from './Router/AppRouter';
+import { ProjectContextProvider } from './context/ProjectContextProvider';
 
 function App() {
 
 
 
   return (
-      // <ProjectContextProvider>
-        <Router>
-        <MainRoutes />
-      </Router>
-      // </ProjectContextProvider>
+      <AuthContextProvider>
+        <ProjectContextProvider>         
+          <AppRouter />      
+        </ProjectContextProvider>
+      </AuthContextProvider>
       
   );
 }

@@ -38,10 +38,13 @@ export const SignUpComponent = ({history}) => {
             localStorage.setItem('token',response.data.token)
             history.replace('/login')
 
-        }, (error) => {
-            setErros({ ...erros, response: `UPS! ${error.response.data.error.message}`});
-        });
+        })
+        .catch(error => {
 
+            setErros({ ...erros, response: error.response.data.error.message});
+         
+        });
+        
     } 
     return (
         <div>
@@ -50,6 +53,7 @@ export const SignUpComponent = ({history}) => {
                     <h1>SIGNUP</h1>
                     <label for="exampleInputEmail1" className="form-label">Email address</label>
                     <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" onChange={handleOnchange} value={state.email} name="email"/>
+                    <div id="emailHelp" className="form-text"> {erros.response && <p className="alert alert-danger">{erros.response}</p>} </div>
                     <div id="emailHelp" className="form-text"> {erros.email && <p className="alert alert-danger">{erros.email}</p>} </div>
                 </div>
                 <div className="mb-3">

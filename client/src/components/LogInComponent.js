@@ -1,10 +1,17 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import  axios from 'axios'
+import {validateLogin} from './utils/validateLogin'
+import {AuthContext} from '../context/AuthContext' 
+import { useHistory } from 'react-router'
 
-export const LogInComponent = ({history}) => {
+export const LogInComponent = () => {
 
+    const history = useHistory()
     const initialState = {email:'', password: ''}
     const [state, setstate] = useState(initialState)
+    const [erros, setErros] = useState({})
+    const [isSubmiting, setisSubmiting] = useState(false)
+    const {login, user} = useContext(AuthContext)
     
     const handleOnchange =(e)=>{
         const{name,value}=e.target
@@ -14,20 +21,30 @@ export const LogInComponent = ({history}) => {
 
     const handleOnClick = (e) => {
         e.preventDefault()
-        axios.post('http://localhost:3002/login', state)
-        .then((response) => {
-            console.log(response.data.token);
-            localStorage.setItem('token',response.data.token)
-        },
-        ).catch((error) => {
-            console.log(error)
-        })
-
-        history.replace('/projects')
-        
-
+        setErros(validateLogin(state))
+        setisSubmiting(true)        
     }
 
+    
+    const submitLogin = () => {
+        console.log('this is state: ', state)
+        login(state)
+        history.push('/projects')
+        
+    }
+
+    useEffect(() => {
+        if(Object.keys(erros).length === 0 && isSubmiting === true) {
+            submitLogin()
+        }
+     },[erros, isSubmiting])
+
+    useEffect(() => {
+        if (user) {
+			history.push('/projects');
+		}
+    }, []) 
+    
     return (
          <div>
             <form>
@@ -36,11 +53,13 @@ export const LogInComponent = ({history}) => {
                     <h1>LOGIN</h1>
                     <label for="exampleInputEmail1" className="form-label">Email address</label>
                     <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" onChange={handleOnchange} value={state.email} name="email"/>
-                    <div id="emailHelp" className="form-text"> We'll never share your email with anyone else.</div>
+                    <div id="emailHelp" className="form-text"> {erros.response && <p className="alert alert-danger">{erros.response}</p>} </div>
+                    <div id="emailHelp" className="form-text"> {erros.email && <p className="alert alert-danger">{erros.email}</p>} </div>
                 </div>
                 <div className="mb-3">
                     <label for="exampleInputPassword1" className="form-label">Password</label>
                     <input type="password" className="form-control" id="exampleInputPassword1" onChange={handleOnchange} value={state.password} name="password"/>
+                    <div id="emailHelp" className="form-text"> {erros.password && <p className="alert alert-danger">{erros.password}</p>} </div>
                 </div>
                 <button type="submit" className="btn btn-primary" onClick={handleOnClick}>Submit</button>
             </form>
