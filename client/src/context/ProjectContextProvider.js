@@ -12,6 +12,28 @@ export const ProjectContextProvider = ({children}) => {
 
     console.log('user from project context: ', user)
 
+    const createProject = (projectTitle, projectDescription) => {
+        if (user) {
+          axios.post('http://localhost:3002/projects',
+            {
+              projectTitle,
+              projectDescription
+            },
+            {
+              headers: {
+                Authorization: user
+              }
+            })
+            .then(({ data }) => {
+              setProjects([data, ...projects])
+            })
+            .catch(error => {
+              console.log(error.response)
+            })
+        }
+    
+      }
+
     const getProjects = ()=> {
             axios.get('http://localhost:3002/projects', {
                 headers: {
@@ -29,9 +51,10 @@ export const ProjectContextProvider = ({children}) => {
     }
 
     const deleteProject = (id) => {
+        console.log('id desde projectcontext: ', id)
         if (user) {
-    
-          axios.delete(`/projects/${id}`,
+        console.log('user desde PC: ', user)
+          axios.delete(`http://localhost:3002/projects/${id}`,
             {
               headers: {
                 Authorization: user
@@ -51,6 +74,8 @@ export const ProjectContextProvider = ({children}) => {
         }
     }
 
+
+
     useEffect(() => {
         if (user) {
           getProjects()
@@ -59,7 +84,7 @@ export const ProjectContextProvider = ({children}) => {
     
     
     return (
-        <ProjectContext.Provider value={{projects}}>
+        <ProjectContext.Provider value={{projects, createProject, deleteProject}}>
         {children}
       </ProjectContext.Provider>
     )

@@ -1,8 +1,15 @@
-import React, {useState, useEffect } from 'react'
+import React, {useState, useEffect, useContext } from 'react'
 import axios from 'axios'
-import { CreateProjectContainerView } from './CreateProjectContainerView'
+import { CreateProjectView } from './CreateProjectView'
+import { ProjectContext } from '../../context/ProjectContext'
+import { useHistory, useParams } from 'react-router'
 
-export const CreateProjectContainer = ({history}) => {
+export const CreateProjectContainer = () => {
+    const {projects, createProject} = useContext(ProjectContext)
+    
+    const { id } = useParams()
+    const history = useHistory()
+    
     const initialState = {projectTitle: '', projectDescription: ''}
     const [state, setstate] = useState(initialState)
 
@@ -20,27 +27,15 @@ export const CreateProjectContainer = ({history}) => {
 
     const handleOnClick = (e) => {
         e.preventDefault()
-        
-        // fetchProjects()
-       
-        const authorizationToken = localStorage.getItem('token');
-        // console.log(authorizationToken)
-    
-        axios.post('http://localhost:3002/projects', state, {headers: {authorization: authorizationToken }})
-        .then((response) => {
-            console.log(response);
-            history.replace('/projects')
-        },
-        ).catch((error) => {
-            console.log(error)
-        })
+        console.log('state.projectTitle, state.projectDescription: ', state.projectTitle, state.projectDescription)
+        createProject(state.projectTitle, state.projectDescription)
     }
 
 
 
     return (
         <div>
-            <CreateProjectContainerView 
+            <CreateProjectView 
             handleOnChange={handleOnChange}
             handleOnClick={handleOnClick}
             value={state}

@@ -4,35 +4,24 @@ import { GetProjectsView } from './GetProjectsView'
 import { Link, useHistory, useParams } from 'react-router-dom'
 import { ProjectContext } from '../../context/ProjectContext'
 import {AuthContext} from '../../context/AuthContext'
+import { CreateProjectContainer } from './CreateProjectContainer'
 
 
 
 
 export const GetProjectsContainer = () => {
     const history = useHistory()
-    const {projects, setProjects} = useContext(ProjectContext)
+    const {projects, deleteProject} = useContext(ProjectContext)
     const {user} = useContext(AuthContext)
     const {id} = useParams()
     // const {editProjects, setEditProjects} = useContext(ProjectContext)
   
    console.log('projects: ', projects)
 
-   
-    const handleDelete = (id) => {
-      
-      axios.delete(`http://localhost:3002/projects/${id}`, {headers: {Authorization: user}})
-      .then((response)=>{
-        console.log(response)
-        const deletedProject = projects.filter((project) => project._id !== id)
-        setProjects(deletedProject)
-        history.push('/projects')
-      })
-      .catch((error) => {
-          console.log(error)
-          
-      })
 
-    }
+    const handleDelete = (id) => {
+      deleteProject(id)
+	}
 
     if(!projects) {
       return <h2>loading...</h2>
@@ -42,7 +31,19 @@ export const GetProjectsContainer = () => {
     // }
 
     return (<>
-        <Link to='/createProject' className='nav nav-link'>Create Project</Link>
+        <div className="container">
+          <div className="row justify-content-center">
+              <div className="col-5">
+                <CreateProjectContainer />
+              </div>
+          </div>
+        </div>
+        <div className="row justify-content-center">
+        <div>
+
+          <h2>Enlisted Projects</h2>
+        </div>
+        </div>
         {
           projects.map((project) => (
             <GetProjectsView
