@@ -6,7 +6,7 @@ const getTasks = async (req, res, next) => {
     const userId = req.payload;
     if (!userId) throw createError.Unauthorized('unauthorized');
 
-    const { projectId } = req.body;
+    const { projectId } = req.query;
 
     if (!projectId) throw createError.NotFound('Project doesn\'t exists ');
 
@@ -23,7 +23,7 @@ const createTask = async (req, res, next) => {
   try {
     const userId = req.payload;
     if (!userId) throw createError.Unauthorized('unauthorized');
-
+    console.log(projectId);
     if (!projectId) throw createError.NotFound('Project doesn\'t exists ');
 
     const newTask = new Task({ task, projectId });

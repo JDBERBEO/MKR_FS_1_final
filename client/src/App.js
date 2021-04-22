@@ -9,6 +9,7 @@ import {
 import { AuthContextProvider } from './context/AuthContextProvider';
 import { AppRouter } from './Router/AppRouter';
 import { ProjectContextProvider } from './context/ProjectContextProvider';
+import { TaskContextProvider } from './context/TaskContextProvider';
 
 function App() {
 
@@ -16,8 +17,10 @@ function App() {
 
   return (
       <AuthContextProvider>
-        <ProjectContextProvider>         
-          <AppRouter />      
+        <ProjectContextProvider>
+          <TaskContextProvider>
+            <AppRouter />
+          </TaskContextProvider>      
         </ProjectContextProvider>
       </AuthContextProvider>
       

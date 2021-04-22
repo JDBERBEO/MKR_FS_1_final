@@ -29,6 +29,15 @@ export const GetProjectsContainer = () => {
         history.push(`/projects/${id}`)
     }
 
+    const handleCreateTask=(id)=>{
+      console.log('id desde handleCreateTask', id)
+      history.push(`/projects/${id}/tasks/create`)
+    }
+
+    const handleShowTasks = (id) => {
+      history.push(`/projects/${id}/tasks`)
+    }
+
     return (<>
         <div className="container-createproject-form">
           <div className="row justify-content-center">
@@ -49,7 +58,8 @@ export const GetProjectsContainer = () => {
             project ={project}
             handleEdit={handleEdit}
             handleDelete={handleDelete}
-            
+            handleCreateTask={handleCreateTask}
+            handleShowTasks={handleShowTasks}
             />))
           }
         </div>
