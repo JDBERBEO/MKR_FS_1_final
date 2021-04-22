@@ -5,6 +5,7 @@ import { Link, useHistory, useParams } from 'react-router-dom'
 import { ProjectContext } from '../../context/ProjectContext'
 import {AuthContext} from '../../context/AuthContext'
 import { CreateProjectContainer } from './CreateProjectContainer'
+import './GetProjects.css'
 
 
 
@@ -31,29 +32,29 @@ export const GetProjectsContainer = () => {
     // }
 
     return (<>
-        <div className="container">
+        <div className="container-createproject-form">
           <div className="row justify-content-center">
               <div className="col-5">
                 <CreateProjectContainer />
               </div>
           </div>
         </div>
-        <div className="row justify-content-center">
+        <div className="row justify-content-center" id="enlistedprojects">
         <div>
 
-          <h2>Enlisted Projects</h2>
-        </div>
+          <h2 className="enlisted-title">Enlisted Projects</h2>
         </div>
         {
           projects.map((project) => (
             <GetProjectsView
-              key={project._id}
-              project ={project}
-              // handleEdit={handleEdit}
-              handleDelete={handleDelete}
-
+            key={project._id}
+            project ={project}
+            // handleEdit={handleEdit}
+            handleDelete={handleDelete}
+            
             />))
-        }
+          }
+        </div>
       </>
        
     )

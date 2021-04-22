@@ -6,8 +6,8 @@ export const GetProjectsView = ({project, handleDelete, handleEdit}) => {
 
     return (<>
         <div className="container">
-            <div className="row justify-content-center">
-                <div className="col-9">
+            <div className="row justify-content-center align-items-start">
+                <div className="col-6">
                     <div className="card">
                         <div className="card-body">
                             <h5 className="card-title">{project.projectTitle}</h5>

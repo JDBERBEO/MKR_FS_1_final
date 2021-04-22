@@ -1,0 +1,24 @@
+.container-createproject-form {
+    background-color: rgba(4, 42, 75, 0.79);
+    color:rgb(224, 230, 237);
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+#enlistedprojects {
+    background-image: url('../../assets/enlistedprojectspic.jpg');
+    background-color: black;
+    height: 1200px;
+    background-position: center;
+    background-size: 100% 100%; 
+}
+
+.enlisted-title {
+    margin-top: 20%;
+    color:  rgba(4, 42, 75, 0.79);
+    font-size: 50px;
+    border-style: solid;
+    border-radius: 25px;
+    padding: 10px;
+    border-color:  rgba(4, 42, 75, 0.79);
+}
