@@ -1,8 +1,8 @@
 import React from 'react'
 import { Router, Switch } from 'react-router'
-import { LogInComponent } from '../components/LogInComponent'
-import { MainPage } from '../components/MainPage'
-import { SignUpComponent } from '../components/SignUpComponent'
+import { LogInComponent } from '../components/LogIn/LogInComponent'
+import { MainPage } from '../components/MainPage/MainPage'
+import { SignUpComponent } from '../components/SignUp/SignUpComponent'
 import { PublicRouter } from './PublicRouter'
 
 export const PublicRoutes = () => {

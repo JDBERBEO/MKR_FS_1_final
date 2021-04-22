@@ -4,17 +4,17 @@ import {
     Switch,
     Route,
   } from "react-router-dom";
-  import { MainPage} from '../components/MainPage'
+  import { MainPage} from '../components/MainPage/MainPage'
   import {MainRoutes} from './MainRoutes'
   import {PrivateRoute} from './PrivateRoute'
 import {AuthContext} from '../context/AuthContext'
 import { PublicRouter } from './PublicRouter';
-import { SignUpComponent } from '../components/SignUpComponent';
-import { LogInComponent } from '../components/LogInComponent';
+import { SignUpComponent } from '../components/SignUp/SignUpComponent';
+import { LogInComponent } from '../components/LogIn/LogInComponent';
 import { AppNav } from '../components/GlobalComponents/AppNav';
 import { HomeNav } from '../components/GlobalComponents/HomeNav';
 import { Home } from '../components/GlobalComponents/Home';
-import { MasterPage } from '../components/GlobalComponents/MasterPage';
+import { MasterPage } from '../components/MainPage/MasterPage';
 import { GetProjectsContainer } from '../components/Projects/GetProjectsContainer';
 
 

@@ -10,20 +10,22 @@ import {AuthContext} from '../../context/AuthContext'
 
 export const GetProjectsContainer = () => {
     const history = useHistory()
-    const {projects} = useContext(ProjectContext)
+    const {projects, setProjects} = useContext(ProjectContext)
     const {user} = useContext(AuthContext)
     const {id} = useParams()
     // const {editProjects, setEditProjects} = useContext(ProjectContext)
   
    console.log('projects: ', projects)
 
+   
     const handleDelete = (id) => {
       
       axios.delete(`http://localhost:3002/projects/${id}`, {headers: {Authorization: user}})
       .then((response)=>{
         console.log(response)
         const deletedProject = projects.filter((project) => project._id !== id)
-        // setProjects(deletedProject)
+        setProjects(deletedProject)
+        history.push('/projects')
       })
       .catch((error) => {
           console.log(error)
@@ -47,8 +49,8 @@ export const GetProjectsContainer = () => {
               key={project._id}
               project ={project}
               // handleEdit={handleEdit}
-              // handleDelete={handleDelete}
-            //   handleVotar={handleVotar}
+              handleDelete={handleDelete}
+
             />))
         }
       </>

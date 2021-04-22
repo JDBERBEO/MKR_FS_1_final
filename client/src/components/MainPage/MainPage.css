@@ -1,0 +1,21 @@
+.container-mainpage {
+    background-image: url("../../assets/pexels-startup-stock-photos-7369.jpg");
+    background-color: black;
+    height: 1200px;
+    background-position: center;
+    background-size: 100% 100%; 
+   }
+
+.intro-text{
+       font-size: 40px;
+       color: rgba(4, 42, 75, 0.79);
+       text-align: justify;
+   }
+
+.logo {
+       height: 300px;
+       width:300px;
+       display:block;
+       margin:auto;
+   }
+

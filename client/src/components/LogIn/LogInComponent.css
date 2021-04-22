@@ -1,0 +1,30 @@
+.container-login {
+    background-image: url("../../assets/loginpic.jpg");
+    background-color: black;
+    height: 1200px;
+    background-position: center;
+    background-size: 100% 100%; 
+}
+
+.logo-login {
+    height: 300px;
+    width:300px;
+    display:block;
+    margin:auto;
+    border-radius: 50%;
+    border-width: 5px;
+    border-style:solid;
+}
+
+.login-form{
+    margin-top: 20%;
+    margin-left: 5%;
+    display:block;
+    color: rgb(224, 230, 237);
+    
+}
+
+.login-header{
+    text-align: center;
+    margin-top: 15px;
+}

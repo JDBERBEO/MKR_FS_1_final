@@ -1,5 +1,5 @@
 import React from 'react'
-import './MainPage.css'
+
 export const MasterPage = () => {
   return (
     <section id="hero">
