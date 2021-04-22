@@ -14,7 +14,7 @@ export const GetProjectsView = ({project, handleDelete, handleEdit}) => {
                             <p className="card-text">{project.projectDescription}</p>
                             {/* click para abrir tareas */}
                             <button className="btn btn-danger" onClick={()=>handleDelete(project._id)}>Delete</button> 
-                            <button className="btn btn-secondary" onClick={()=>handleEdit(project)}>Edit</button>
+                            <button className="btn btn-secondary" onClick={()=>handleEdit(project._id)}>Edit</button>
                         </div>
                     </div>                 
                 </div>

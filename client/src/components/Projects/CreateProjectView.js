@@ -14,7 +14,8 @@ export const CreateProjectView = ({handleOnChange, value, handleOnClick}) => {
                     <label for="textform" className="form-label">Project Description</label>
                     <input type="text" className="form-control" id="exampleInputPassword1" name="projectDescription" onChange={handleOnChange} value={value.description}/>
                 </div>
-                <Link type="submit" className="btn btn-dark" onClick={handleOnClick}>Create Project</Link>
+
+                <Link type="submit" className="btn btn-dark" onClick={handleOnClick}>Submit</Link>
                
             </form>
         </div>

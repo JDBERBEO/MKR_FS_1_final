@@ -34,6 +34,65 @@ export const ProjectContextProvider = ({children}) => {
     
       }
 
+    const editProject = (id, projectTitle, projectDescription) => {
+        if (user) {
+    //optimistic Update
+          const newProjects = projects.map((project) => {
+            if (project._id === id) {
+              return {
+                ...project,
+                projectTitle,
+                projectDescription
+              }
+            } else {
+              return project
+            }
+          });
+          setProjects(newProjects)
+    
+          axios.put(`http://localhost:3002/projects/${id}`,
+            {
+              projectTitle,
+              projectDescription
+            },
+            {
+              headers: {
+                Authorization: user
+              }
+            })
+            .then(({ status }) => {
+              if (status === 200) {
+    
+                const newProjects = projects.map((project) => {
+    
+                  if (project._id === id) {
+                    console.log('enter here')
+                    console.log(project)
+                    return {
+                      ...project,
+                      projectTitle,
+                      projectDescription
+                    }
+                  } else {
+                    console.log('no es el projecto')
+                    return project
+                  }
+    
+    
+                });
+                setProjects(newProjects)
+              }
+    
+            })
+            .catch(error => {
+              console.log(error.response)
+              if(error){
+                getProjects()
+              }
+            })
+        }
+      }
+
     const getProjects = ()=> {
             axios.get('http://localhost:3002/projects', {
                 headers: {
@@ -84,7 +143,7 @@ export const ProjectContextProvider = ({children}) => {
     
     
     return (
-        <ProjectContext.Provider value={{projects, createProject, deleteProject}}>
+        <ProjectContext.Provider value={{projects, createProject, deleteProject, editProject}}>
         {children}
       </ProjectContext.Provider>
     )

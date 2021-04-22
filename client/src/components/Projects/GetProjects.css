@@ -8,17 +8,20 @@
 #enlistedprojects {
     background-image: url('../../assets/enlistedprojectspic.jpg');
     background-color: black;
-    height: 1200px;
+    height: 1500px;
     background-position: center;
     background-size: 100% 100%; 
 }
 
 .enlisted-title {
-    margin-top: 20%;
+    margin-top: 10%;
+    margin-left: 20%;
+    margin-right: 20%;
     color:  rgba(4, 42, 75, 0.79);
     font-size: 50px;
     border-style: solid;
     border-radius: 25px;
     padding: 10px;
     border-color:  rgba(4, 42, 75, 0.79);
+    text-align: center;
 }

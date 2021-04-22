@@ -5,7 +5,7 @@ import { ProjectContext } from '../../context/ProjectContext'
 import { useHistory, useParams } from 'react-router'
 
 export const CreateProjectContainer = () => {
-    const {projects, createProject} = useContext(ProjectContext)
+    const {projects, createProject, editProject } = useContext(ProjectContext)
     
     const { id } = useParams()
     const history = useHistory()
@@ -27,8 +27,17 @@ export const CreateProjectContainer = () => {
 
     const handleOnClick = (e) => {
         e.preventDefault()
-        console.log('state.projectTitle, state.projectDescription: ', state.projectTitle, state.projectDescription)
-        createProject(state.projectTitle, state.projectDescription)
+        if (id) {
+			console.log('edit project')
+			console.log('id desde edit: ', id)
+            
+			editProject(id, state.projectTitle, state.projectDescription)
+            console.log('state.projectTitle, state.projectDescription: ', state.projectTitle, state.projectDescription)
+			history.push('/projects');
+		}else{
+
+            createProject(state.projectTitle, state.projectDescription)
+        }
     }
 
 
